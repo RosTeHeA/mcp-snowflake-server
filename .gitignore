@@ -6,3 +6,9 @@ uv.lock
 src/mcp_snowflake_server/__pycache__
 **/.DS_Store
 # dist
+
+# Custom connection files (keep credentials safe)
+my_connections.toml
+*_connections.toml
+*.pem
+*.p8
