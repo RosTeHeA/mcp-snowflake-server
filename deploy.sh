@@ -54,19 +54,19 @@ ssh $SSH_ALIAS << 'EOF'
     echo "📦 Installing uv if needed..."
     if ! command -v uv &> /dev/null; then
         curl -LsSf https://astral.sh/uv/install.sh | sh
-        source ~/.bashrc
+        export PATH="$HOME/.local/bin:$PATH"
     fi
     
     echo "📦 Installing/updating dependencies..."
-    uv sync
+    $HOME/.local/bin/uv sync
     
     echo "🧪 Testing installation..."
-    uv run start_http_server.py --help > /dev/null
+    $HOME/.local/bin/uv run start_http_server.py --help > /dev/null
     
     echo "✅ Server deployment complete!"
     echo "🚀 To start the HTTP server, run:"
     echo "   cd /home/appuser/mcp-snowflake-server"
-    echo "   nohup uv run start_http_server.py --connections-file my_connections.toml --connection-name production --host 0.0.0.0 --port 8000 > server.log 2>&1 &"
+    echo "   nohup $HOME/.local/bin/uv run start_http_server.py --connections-file my_connections.toml --connection-name production --host 0.0.0.0 --port 8000 > server.log 2>&1 &"
 EOF
 
 echo "🎉 Deployment completed successfully!"
